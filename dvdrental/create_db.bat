@@ -1,0 +1,1 @@
+.\bin\psql -U postgres -a -f dvdrental-dump.sql

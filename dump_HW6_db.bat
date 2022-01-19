@@ -1,0 +1,1 @@
+.\dvdrental\bin\pg_dump.exe -U postgres --dbname="hw6" --file="hw6-dump.sql" --clean --if-exists --create --schema-only

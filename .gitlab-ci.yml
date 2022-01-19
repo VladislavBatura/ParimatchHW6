@@ -1,0 +1,25 @@
+image: mcr.microsoft.com/dotnet/sdk:6.0
+
+services:
+  - name: git.betlab.com:4567/paymenthub/ph2-ci-tools/postgres:latest
+    alias: postgres
+
+variables:
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "qweQWE123!@#"
+  POSTGRES_HOST_AUTH_METHOD: "trust"
+
+build:
+  stage: build
+  script:
+    - 'apt-get update && apt-get install -y --no-install-recommends --allow-downgrades postgresql-client'
+    - 'pgsql -U postgres -a -f ./hw6-dump.sql'
+  tags:
+    - docker-shared
+
+tests:
+  stage: test
+  script:
+    - 'dotnet vstest ./hw6.tests/PostgreSQL_HW6_Test.dll'
+  tags:
+    - docker-shared
